@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Chart from 'chart.js';
 import './ChartCommon.css'
 
-class BarChart extends Component {
+class LineChart extends Component {
   constructor(props) {
     super(props);
 
@@ -22,14 +22,16 @@ class BarChart extends Component {
 
   componentDidMount() {
     let self = this;
-    const { chartData, chartDataProps, chartOptions } = this.props;
+    const { chartType, chartData, chartDataProps, chartOptions } = this.props;
     this.chartData = {
-      type: "bar",
+      type: chartType,
       data: chartDataProps,
       options: chartOptions(self)
     }
     if (Array.isArray(chartData)) {
-      this.chartData.data.datasets[0].data = chartData
+      chartData.map((d, idx) => {
+        this.chartData.data.dataset[idx].data = d.value
+      })
     }
     /*
      * Component DOM mount 완료 후 최초 차트 생성 지점
@@ -41,13 +43,23 @@ class BarChart extends Component {
     this.chart.destroy();
   }
 
+  /* componentWillReceiveProps 단계에서 비교를 위해 data 두 개를 받아서 확인
+   * length - key - value 순으로 진행한다
+   */
   compareData = (prevData, nextData) => {
     if (prevData.length !== nextData.length) {
       return false
     }
-    for ( let i = 0; i < prevData.length; i++) {
-      if (prevData[i] !== nextData[i]) {
+    for ( let i = 0; i < nextData.length; i++) {
+      if (prevData[i].key !== nextData[i].key) {
         return false
+      } else if (prevData[i].value.length !== nextData[i].value.length) {
+        return false
+      }
+      for ( let j = 0; j < nextData[i].value.length; j++) {
+        if (prevData[i].value[j] !== nextData[i].value[j]) {
+          return false
+        }
       }
     }
     return true
@@ -55,7 +67,9 @@ class BarChart extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (!this.compareData(this.props.chartData, nextProps.chartData)) {
-      this.chartData.data.datasets[0].data = nextProps.chartData
+      nextProps.chartData.map((d, idx) => {
+        this.chartData.data.datasets[idx].data = d.value;
+      })
       this.chart.update();
     }
   }
@@ -77,4 +91,4 @@ class BarChart extends Component {
   }
 }
 
-export default BarChart;
+export default LineChart;
