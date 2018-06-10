@@ -35,10 +35,36 @@ class BarChart extends Component {
      * Component DOM mount 완료 후 최초 차트 생성 지점
      */
     this.chart = new Chart(this.ctx, this.chartData);
+<<<<<<< HEAD
   }
 
   componentWillUnmount() {
     this.chart.destroy();
+=======
+
+    this.chartDataUpdate();
+
+    setInterval(this.chartDataUpdate, 5000);
+  }
+
+  getRand = () => {
+    return Math.random() * 10
+  }
+
+  chartDataUpdate = () => {
+    this.chartData.data.datasets[0].data = [
+      this.getRand(),
+      this.getRand(), 
+      this.getRand(), 
+      this.getRand(), 
+      this.getRand(), 
+      this.getRand(), 
+    ]
+
+    // Update Chart
+    this.chart.update(this.chartData);
+    
+>>>>>>> dfb133df49dc7e51ed887e172b2a6cd801e7924e
   }
 
   compareData = (prevData, nextData) => {
@@ -63,6 +89,7 @@ class BarChart extends Component {
   render() {
     const { width, height, units } = this.props;
     return (
+<<<<<<< HEAD
       /* Chartjs Library 사용시 Canvas를 직접적으로 조작하는 것은 권장되지 않는다.
        * 컴포넌트의 컨테이너(div)로 감싸준 뒤 해당 값을 조정하는 것이 낫다
        * Units라는 별도의 항목을 두어 px, vh, % 중 선택할 수 있도록 한다.
@@ -71,6 +98,14 @@ class BarChart extends Component {
         <canvas 
           ref={this.initCanvas}
           id="myChart"
+=======
+      <div style={{width: '600px', height: '600px'}}>
+        <canvas 
+          ref={this.initCanvas}
+          id="myChart"
+          width="300"
+          height="300"
+>>>>>>> dfb133df49dc7e51ed887e172b2a6cd801e7924e
         />
       </div>
     );
