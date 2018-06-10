@@ -17,6 +17,8 @@ class BarChart extends Component {
   componentDidMount() {
     this.chart = new Chart(this.ctx, this.chartData);
 
+    this.chartDataUpdate();
+
     setInterval(this.chartDataUpdate, 5000);
   }
 
@@ -25,7 +27,6 @@ class BarChart extends Component {
   }
 
   chartDataUpdate = () => {
-    console.log(this.chartData.data.datasets[0])
     this.chartData.data.datasets[0].data = [
       this.getRand(),
       this.getRand(), 
@@ -35,7 +36,9 @@ class BarChart extends Component {
       this.getRand(), 
     ]
 
-    this.chart = new Chart(this.ctx, this.chartData);
+    // Update Chart
+    this.chart.update(this.chartData);
+    
   }
 
   chartDataCombinator = () => {
@@ -72,12 +75,12 @@ class BarChart extends Component {
   render() {
     const { width, height } = this.props;
     return (
-      <div>
+      <div style={{width: '600px', height: '600px'}}>
         <canvas 
           ref={this.initCanvas}
           id="myChart"
-          width={width}
-          height={height}
+          width="300"
+          height="300"
         />
       </div>
     );

@@ -8,7 +8,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <BarChart width={400} height={400}/>
+        <BarChart width={200} height={200}/>
       </div>
     );
   }
