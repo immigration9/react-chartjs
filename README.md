@@ -1,13 +1,7 @@
-
-    ____                  __     ________               __      _______
-   / __ \___  ____ ______/ /_   / ____/ /_  ____ ______/ /_    / / ___/
-  / /_/ / _ \/ __ `/ ___/ __/  / /   / __ \/ __ `/ ___/ __/_  / /\__ \ 
- / _, _/  __/ /_/ / /__/ /_   / /___/ / / / /_/ / /  / /_/ /_/ /___/ / 
-/_/ |_|\___/\__,_/\___/\__/   \____/_/ /_/\__,_/_/   \__/\____//____/  
-                                                                       
-
-# ChartJS React 사용시 활용 가이드라인
-http://www.chartjs.org/docs/latest/
+# React + ChartJS (Not to be confused with the preexisting react-chartjs library)
+ChartJS React 사용시 활용 가이드라인
+Reference: 
+Docs: http://www.chartjs.org/docs/latest/
 
 ## Getting Started
 ```shell
