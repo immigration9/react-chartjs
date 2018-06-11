@@ -40,6 +40,9 @@ class LineChart extends Component {
   }
 
   componentWillUnmount() {
+    /* 컴포넌트 Unmount 시 차트 삭제
+     *
+     */
     this.chart.destroy();
   }
 
